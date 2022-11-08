@@ -1,0 +1,36 @@
+---
+format: 
+  revealjs:
+    transition: fade
+    background-transition: fade
+    auto-slide: 10000
+    loop: true
+    include-before-body: "_timer_gen_fragment.html"
+---
+
+## Break Time!
+
+### The R/Pharma Conference will resume again shortly...
+
+### Until then, enjoy some relaxing tunes curtesy of Mike Smith
+
+```{r}
+#| label: setup 
+#| include: false
+library(countdown)
+# import file paths to all images
+message(getwd())
+slide_imgs <- fs::dir_ls("img")
+```
+
+
+```{r}
+#| label: create-slides
+#| echo: false 
+#| results: asis
+purrr::walk(slide_imgs, ~{
+  header_text <- glue::glue("## {background-image='<<.x>>' background-size='cover'}", .open = "<<", .close = ">>")
+  cat(header_text, '\n\n')
+})
+```
+
